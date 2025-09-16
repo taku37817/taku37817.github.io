@@ -330,6 +330,75 @@
                 color: #666666 !important;
             }
         }
+	
+	body {
+            font-family: 'Inter', sans-serif;
+            background-color: #000000; /* 背景を完全な黒に変更 */
+            color: #ffffff; /* テキストの色を白に変更 */
+            line-height: 1.6;
+        }
+        .container {
+            max-width: 960px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+        .section {
+            background-color: #1a1a1a; /* セクションの背景色を少し明るい黒に変更 */
+            padding: 2rem;
+            margin-bottom: 2rem;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.5); /* 影をより目立つように変更 */
+        }
+        .section-title {
+            font-size: 2rem;
+            font-weight: bold;
+            color: #ffffff; /* タイトルの色を白に変更 */
+            border-bottom: 2px solid #4a5568; /* 区切り線の色も変更 */
+            padding-bottom: 0.5rem;
+            margin-bottom: 1.5rem;
+        }
+        .text-blue-400 {
+            color: #60a5fa;
+        }
+        .hover\:underline:hover {
+            text-decoration: underline;
+        }
+        /* Flexboxを使った画像グリッドのスタイル */
+        .image-grid {
+            display: flex;
+            flex-wrap: wrap; /* 画像が画面幅に応じて折り返すように設定 */
+            gap: 16px; /* 画像間の隙間 */
+            justify-content: center; /* 画像を中央揃えにする */
+        }
+        .image-grid img {
+            width: 100%; /* 小さい画面では幅いっぱいにする */
+            max-width: 400px; /* 画像の最大幅 */
+            height: auto; /* 画像の縦横比を維持 */
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+            object-fit: cover;
+        }
+        /* 大きく表示する画像のスタイル */
+        .image-grid .large-img {
+            max-width: 600px; /* 通常の画像より大きく表示 */
+        }
+
+        /* 画面幅が640px以上の場合のスタイル */
+        @media (min-width: 640px) {
+            .image-grid img {
+                width: calc(50% - 8px); /* 2列表示にする */
+            }
+        }
+        /* 画面幅が960px以上の場合のスタイル */
+        @media (min-width: 960px) {
+            .image-grid img {
+                width: calc(33.333% - 16px); /* 3列表示にする */
+            }
+            /* 大きく表示する画像は1列で表示 */
+            .image-grid .large-img {
+                width: 100%;
+            }
+        }
     </style>
 </head>
 
@@ -352,8 +421,9 @@
                     <li><a href="#item-introduction" class="text-blue-400 hover:underline">6. 💎 アイテム紹介：①プロジェクト概要(開発訓練用ゲーム)</a></li>
                     <li><a href="#modules-used" class="text-blue-400 hover:underline">7. 🛠️ 実装技術の詳細：①プロジェクト概要(開発訓練用ゲーム)</a></li>
                     <li><a href="#library-list" class="text-blue-400 hover:underline">8. 🛠️ ライブラリ一覧：①プロジェクト概要(開発訓練用ゲーム)</a></li>
-                    <li><a href="#ue-experience-learning" class="text-blue-400 hover:underline">9. 🎮 UnrealEngineの経験と学び</a></li>
-                    <li><a href="#unity-experience-learning" class="text-blue-400 hover:underline">10. 🎮 Unityの経験と学び</a></li>
+       		    <li><a href="#blender-portfolio" class="text-blue-400 hover:underline">9.🖼️ Blender作品集</a></li>
+                    <li><a href="#ue-experience-learning" class="text-blue-400 hover:underline">10. 🎮 UnrealEngineの経験と学び</a></li>
+                    <li><a href="#unity-experience-learning" class="text-blue-400 hover:underline">11. 🎮 Unityの経験と学び</a></li>
                 </ul>
             </nav>
         </section>
@@ -374,7 +444,7 @@
                 </div>
                 <div class="mt-5 text-gray-500 text-sm space-y-1"> 
                     <h2>出身地：鹿児島県 鹿児島市出身<h2>
-                    <h2>生年月日：1996年9月11日（満28歳）<h2>
+                    <h2>生年月日：1996年9月11日（満29歳）<h2>
                     <p>最終学歴: バンタンゲームアカデミー東京校ゲーム学部ゲームプログラム総合学科　中途退学</p>
                     <p>メールアドレス：syukatsuaddress09@gmail.com</p>
                 </div>
@@ -704,7 +774,7 @@
                 <img src="Image/アイテム紹介(スイッチ関連).png" alt="スイッチ関連アイテムの紹介画像">
                 <p class="mt-8 text-right"><a href="#table-of-contents" class="text-blue-400 hover:underline">目次に戻る</a></p>
                 <!-- 画像のalt属性を修正 -->
-                <img src="Image/アイテム紹介(カギ・ロウソク).png" alt="鍵とロウソクのアイテム紹介画像">
+                <img src="Image/アイテム紹介(カギ).png" alt="鍵とロウソクのアイテム紹介画像">
             </div>
             <p class="mt-8 text-right"><a href="#table-of-contents" class="text-blue-400 hover:underline">目次に戻る</a></p>
         </section>
@@ -929,10 +999,34 @@
             <p class="mt-8 text-right"><a href="#table-of-contents" class="text-blue-400 hover:underline">目次に戻る</a></p>
         </section>
 
+
+	 <!-- 新しく追加されたBlender作品集のセクション -->
+        <section class="section" id="blender-portfolio">
+            <p class="mt-8 text-right"><a href="#table-of-contents" class="text-blue-400 hover:underline">目次に戻る</a></p>
+            <h2 class="section-title">9.🖼️ Blender作品集</h2>
+            <p class="mb-4">
+                Blenderで制作した学習成果・作品を紹介します。
+            </p>
+             <div class="image-grid">
+            
+            <img src="Image/kitchen_cabinet_open.png" alt="キッチン棚">
+            <img src="Image/AK47.png" alt="AK47">
+            <img src="Image/Glock19.png" alt="Glock19">
+            <img src="Image/3D_モデリング水道水.png" alt="水道蛇口">
+            <img src="Image/Xperia 10 IV.png" alt="スマートフォン">
+            <img src="Image/note PC.png" alt="ノートパソコン">
+            <img src="Image/Spoon_modeling_picture_NoNameVer2.png" alt="スプーン">
+　　　	　　<img src="Image/Ryokan_WaRoom.png" alt="旅館客室">
+
+        </div>
+            <p class="mt-8 text-right"><a href="#table-of-contents" class="text-blue-400 hover:underline">目次に戻る</a></p>
+        </section>
+
+
         <!-- 新しいセクションの追加 -->
         <section class="section" id="ue-experience-learning">
             <p class="mt-8 text-right"><a href="#table-of-contents" class="text-blue-400 hover:underline">目次に戻る</a></p>
-            <h2 class="section-title">9. 🎮 UnrealEngineの経験と学び</h2>
+            <h2 class="section-title">10. 🎮 UnrealEngineの経験と学び</h2>
             
             <h3 class="subsection-title">開発前</h3>
             <ul class="list-disc list-inside space-y-2 ml-4">
@@ -940,7 +1034,7 @@
                     <ul class="list-disc list-inside ml-4">
                         <li>必須コンポーネントのチェックが複雑（C++デスクトップ開発、.NET、Windows SDKなど）</li>
                     </ul>
-                </li>
+                </li>a
                 <li><strong>整合性チェック</strong>
                     <ul class="list-disc list-inside ml-4">
                         <li>UE5とVisual Studio 2022のバージョン整合に悩まされました（特にビルドエラーの原因特定）。</li>
@@ -990,7 +1084,7 @@
         <!-- 新しく追加されたUnityの経験と学びセクション -->
         <section class="section" id="unity-experience-learning">
             <p class="mt-8 text-right"><a href="#table-of-contents" class="text-blue-400 hover:underline">目次に戻る</a></p>
-            <h2 class="section-title">10. 🎮 Unityの経験と学び</h2>
+            <h2 class="section-title">11. 🎮 Unityの経験と学び</h2>
             
             <h3 class="subsection-title">基礎学習の難しさ</h3>
             <ul class="list-disc list-inside space-y-2 ml-4">
