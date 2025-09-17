@@ -6,405 +6,11 @@
     <title>川口 拓郎 - ゲームプログラマーポートフォリオ</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
-    <style>
-        /* 基本のボディスタイル */
-        body {
-            font-family: 'Inter', sans-serif;
-            background-color: #1a1a1a;
-            color: #e0e0e0;
-        }
-        /* コンテナの最大幅と中央揃え */
-        .container {
-            max-width: 960px; /* 画面表示時の最大幅 */
-            margin: 0 auto;
-            padding: 2rem;
-        }
-        /* ヘッダー/プロフィールセクションのスタイル */
-        .header-profile {
-            background-color: #282828;
-            color: white;
-            padding: 2rem;
-            border-radius: 0.75rem;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
-            margin-bottom: 2rem;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            text-align: center;
-        }
-        /* レスポンシブ対応：md以上の画面サイズでのヘッダー/プロフィールスタイル */
-        @media (min-width: 768px) {
-            .header-profile {
-                flex-direction: row;
-                align-items: flex-start;
-                text-align: left;
-            }
-        }
-        /* 各セクションの共通スタイル */
-        .section {
-            background-color: #222222;
-            padding: 2rem;
-            border-radius: 0.75rem;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
-            margin-bottom: 2rem;
-            /* 印刷時の改ページを考慮 */
-            page-break-inside: avoid;
-        }
-        /* セクションタイトルのスタイル */
-        .section-title {
-            font-size: 1.75rem;
-            font-weight: 700;
-            color: #e0e0e0;
-            margin-bottom: 1.5rem;
-            border-bottom: 2px solid #4A90E2;
-            padding-bottom: 0.5rem;
-        }
-        /* サブセクションタイトルのスタイル */
-        .subsection-title {
-            font-size: 1.25rem;
-            font-weight: 600;
-            color: #4A90E2;
-            margin-top: 1.5rem;
-            margin-bottom: 1rem;
-        }
-        /* メインコンテンツのレイアウト */
-        .main-content {
-            display: flex;
-            flex-direction: column;
-            gap: 2rem;
-        }
-        /* レスポンシブ対応：lg以上の画面サイズでのメインコンテンツレイアウト */
-        @media (min-width: 1024px) {
-            .main-content {
-                flex-direction: row;
-                gap: 2rem; /* Ensure gap is applied */
-            }
-            .left-panel, .right-panel {
-                flex: 1; /* Make sure both panels take equal space */
-            }
-        }
-        /* 左パネルのスタイル */
-        .left-panel {
-            flex: 1;
-            display: flex;
-            flex-direction: column;
-            gap: 2rem;
-        }
-        /* 右パネルのスタイル */
-        .right-panel {
-            flex: 1;
-        }
-        /* スキル項目のスタイル */
-        .skill-item {
-            display: flex;
-            align-items: center;
-            padding: 0.75rem;
-            border-radius: 0.5rem;
-            background-color: #333333;
-            margin-bottom: 0.5rem;
-        }
-        /* スキルアイコンのスタイル */
-        .skill-icon {
-            width: 36px;
-            height: 36px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 0.8rem;
-            font-weight: bold;
-            color: #fff;
-            margin-right: 0.75rem;
-        }
-        /* 各スキルアイコンの背景色 */
-        .bg-cpp { background-color: #004d99; }
-        .bg-cs { background-color: #6a1a8c; }
-        .bg-py { background-color: #3b76a0; }
-        .bg-js { background-color: #f7df1e; color: #1a1a1a; }
-        .bg-ue { background-color: #3366cc; }
-        .bg-unity { background-color: #000; }
-        .bg-blender { background-color: #f57f17; }
-        .bg-gimp { background-color: #756a59; }
-        .bg-vsc { background-color: #007acc; }
-        .bg-vs { background-color: #5d2b7e; }
-        .bg-git { background-color: #333; }
-        .bg-office { background-color: #1c4587; }
-        .bg-vba { background-color: #0073e6; }
-        .bg-video { background-color: #9b59b6; }
-        /* タイムライン項目のスタイル */
-        .timeline-item {
-            position: relative;
-            padding-left: 20px;
-            margin-bottom: 2rem;
-            page-break-inside: avoid; /* 印刷時の改ページを考慮 */
-        }
-        /* タイムラインマーカーのスタイル */
-        .timeline-marker {
-            position: absolute;
-            left: 0;
-            top: 5px;
-            width: 8px;
-            height: 8px;
-            background-color: #4A90E2;
-            border-radius: 50%;
-        }
-        /* コードブロックのスタイル */
-        .code-block {
-            background-color: #2d2d2d;
-            padding: 1rem;
-            border-radius: 0.5rem;
-            overflow-x: auto;
-            page-break-inside: avoid; /* 印刷時の改ページを考慮 */
-        }
-        /* テーブルの共通スタイル */
-        .lib-table {
-            width: 100%;
-            border-collapse: collapse;
-            margin-bottom: 20px;
-            font-size: 14px;
-            background-color: #1a1a1a;
-            color: white;
-            page-break-inside: avoid; /* 印刷時の改ページを考慮 */
-        }
-        .lib-table th, .lib-table td {
-            padding: 12px;
-            text-align: left;
-            border-bottom: 1px solid #333;
-        }
-        .lib-table th {
-            background-color: #2a2a2a;
-            color: #fff;
-            font-weight: bold;
-        }
-        .lib-table tbody tr:nth-child(odd) {
-            background-color: #1a1a1a;
-        }
-        .lib-table tbody tr:nth-child(even) {
-            background-color: #222222;
-        }
-        .lib-table tbody tr:hover {
-            background-color: #444;
-        }
-        /* リンクの色とホバー時の下線 */
-        .text-blue-400 {
-            color: #60a5fa; /* 青色 */
-        }
-        .hover\:underline:hover {
-            text-decoration: underline; /* マウスを乗せた時に下線をつける */
-        }
-        /* ハイライト用の新しい色 */
-        .text-highlight {
-            color: #b1b1b1; /* 明るいオレンジ色 */
-        }
-        /* 動画のスタイル */
-        video {
-            width: 100%;
-            max-width: 800px;
-            height: auto;
-            display: block;
-            margin: 1.5rem auto;
-            border-radius: 0.75rem;
-            page-break-inside: avoid; /* 印刷時の改ページを考慮 */
-        }
-        /* 画像のスタイル */
-        img {
-            max-width: 100%;
-            height: auto;
-            border-radius: 0.5rem;
-            margin-bottom: 1rem;
-            display: block;
-            margin-left: auto;
-            margin-right: auto;
-            page-break-inside: avoid; /* 印刷時の改ページを考慮 */
-        }
-        /* GitHubリンクの色調整 */
-        .text-blue-400 {
-            color: #60a5fa;
-        }
-
-        /* 印刷用スタイル */
-        @media print {
-            @page {
-                size: A4; /* A4サイズに設定 */
-                margin: 2cm; /* ページの余白 */
-            }
-
-            body {
-                background-color: #ffffff !important; /* 背景を白に */
-                color: #333333 !important; /* テキストを黒に */
-                -webkit-print-color-adjust: exact; /* 背景色や画像を印刷する設定 */
-                print-color-adjust: exact;
-                width: 21cm; /* A4の幅 */
-                min-height: 29.7cm; /* A4の高さ */
-            }
-
-            .container {
-                width: 100%; /* A4幅に合わせる */
-                max-width: 100%;
-                padding: 0; /* 印刷時はpaddingをリセット */
-            }
-
-            .header-profile, .section {
-                background-color: #f0f0f0 !important; /* 背景色を明るく */
-                color: #333333 !important;
-                box-shadow: none !important; /* 影を消す */
-                border: 1px solid #cccccc !important; /* 薄い枠線 */
-                page-break-inside: avoid; /* セクションの途中で改ページしない */
-                margin-bottom: 1.5rem !important; /* 印刷時のセクション間隔 */
-            }
-
-            .section-title {
-                color: #000000 !important; /* タイトル色を黒に */
-                border-bottom-color: #6699ff !important; /* ボーダー色を調整 */
-            }
-
-            .subsection-title {
-                color: #3366cc !important; /* サブタイトル色を調整 */
-            }
-
-            .bg-black, .bg-gray-800 {
-                background-color: #e0e0e0 !important; /* 背景色を明るく */
-                color: #333333 !important;
-            }
-
-            /* リンクは色を残し、下線は印刷時も表示 */
-            a {
-                color: #0000cc !important;
-                text-decoration: underline !important;
-            }
-
-            /* 各スキルアイコンの背景色を調整 */
-            .skill-icon {
-                background-color: #cccccc !important; /* 背景を明るく */
-                color: #333333 !important; /* 文字色を濃く */
-                border: 1px solid #999999;
-            }
-
-            /* 画像と動画はサイズを調整し、影をなくす */
-            img, video {
-                max-width: 90% !important; /* 印刷時の画像サイズ調整 */
-                border-radius: 0 !important;
-                box-shadow: none !important;
-                margin: 1rem auto !important;
-            }
-
-            .code-block {
-                background-color: #f8f8f8 !important; /* コードブロックの背景を明るく */
-                border: 1px solid #cccccc !important;
-                color: #333333 !important;
-                page-break-inside: avoid;
-            }
-
-            /* テーブルの印刷時スタイル調整 */
-            .lib-table {
-                background-color: #f0f0f0 !important;
-                color: #333333 !important;
-                border: 1px solid #cccccc !important;
-            }
-            .lib-table th {
-                background-color: #e0e0e0 !important;
-                color: #000000 !important;
-                border-bottom: 1px solid #999999 !important;
-            }
-            .lib-table td {
-                border-bottom: 1px solid #e0e0e0 !important;
-            }
-            .lib-table tbody tr:nth-child(odd) {
-                background-color: #f8f8f8 !important;
-            }
-            .lib-table tbody tr:nth-child(even) {
-                background-color: #f0f0f0 !important;
-            }
-            .lib-table tbody tr:hover {
-                background-color: #e0e0e0 !important; /* ホバー効果は印刷では不要だが念のため調整 */
-            }
-
-            /* 目次のリンク色も調整 */
-            .text-blue-400 {
-                color: #0000cc !important;
-            }
-            .text-red-500 {
-                color: #cc0000 !important;
-            }
-            .text-gray-400 {
-                color: #666666 !important;
-            }
-        }
-	
-	body {
-            font-family: 'Inter', sans-serif;
-            background-color: #000000; /* 背景を完全な黒に変更 */
-            color: #ffffff; /* テキストの色を白に変更 */
-            line-height: 1.6;
-        }
-        .container {
-            max-width: 960px;
-            margin: 0 auto;
-            padding: 2rem;
-        }
-        .section {
-            background-color: #1a1a1a; /* セクションの背景色を少し明るい黒に変更 */
-            padding: 2rem;
-            margin-bottom: 2rem;
-            border-radius: 12px;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.5); /* 影をより目立つように変更 */
-        }
-        .section-title {
-            font-size: 2rem;
-            font-weight: bold;
-            color: #ffffff; /* タイトルの色を白に変更 */
-            border-bottom: 2px solid #4a5568; /* 区切り線の色も変更 */
-            padding-bottom: 0.5rem;
-            margin-bottom: 1.5rem;
-        }
-        .text-blue-400 {
-            color: #60a5fa;
-        }
-        .hover\:underline:hover {
-            text-decoration: underline;
-        }
-        /* Flexboxを使った画像グリッドのスタイル */
-        .image-grid {
-            display: flex;
-            flex-wrap: wrap; /* 画像が画面幅に応じて折り返すように設定 */
-            gap: 16px; /* 画像間の隙間 */
-            justify-content: center; /* 画像を中央揃えにする */
-        }
-        .image-grid img {
-            width: 100%; /* 小さい画面では幅いっぱいにする */
-            max-width: 400px; /* 画像の最大幅 */
-            height: auto; /* 画像の縦横比を維持 */
-            border-radius: 8px;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
-            object-fit: cover;
-        }
-        /* 大きく表示する画像のスタイル */
-        .image-grid .large-img {
-            max-width: 600px; /* 通常の画像より大きく表示 */
-        }
-
-        /* 画面幅が640px以上の場合のスタイル */
-        @media (min-width: 640px) {
-            .image-grid img {
-                width: calc(50% - 8px); /* 2列表示にする */
-            }
-        }
-        /* 画面幅が960px以上の場合のスタイル */
-        @media (min-width: 960px) {
-            .image-grid img {
-                width: calc(33.333% - 16px); /* 3列表示にする */
-            }
-            /* 大きく表示する画像は1列で表示 */
-            .image-grid .large-img {
-                width: 100%;
-            }
-        }
-    </style>
+    <link rel="stylesheet" href="style.css">
 </head>
 
 <body class="bg-gray-900 text-gray-200 min-h-screen py-12 px-4">
     <div class="container">
-        <!-- 目次セクションの追加 -->
         <section class="section" id="table-of-contents">
             <h2 class="section-title">CONTENTS <span class="text-base text-gray-400 ml-2">目次</span></h2>
             <nav>
@@ -429,7 +35,6 @@
         </section>
 
         <section class="section" id="header-profile">
-            <!-- 画像のalt属性を修正 -->
             <img src="Image/証明写真_履歴書用_3.jpg" alt="川口拓郎のプロフィール写真" class="w-40 h-40 rounded-full object-cover shadow-xl border-4 border-blue-400 md:mr-8 md:mb-0 mb-4">
             <div class="flex-1">
                 <h2 class="section-title">1. 📖 自己紹介</h2>
@@ -740,7 +345,6 @@
         <p class="mt-4">
             この作品は、2019年10月～2020年9月のAIを基本に学習成果を形にしたものです。
         </p>
-        <!-- 「※GitHubで管理はしていますが...」のテキストを赤くするため、div.noteで囲みました -->
         <div class="note">
             <p class="mb-2">
                 <span class="text-red-500">
@@ -752,7 +356,6 @@
         <a href="https://github.com/taku37817/2D_reversible_NeuralNetWork/tree/master/Assets/Script" target="_blank" class="inline-block bg-gray-600 hover:bg-gray-500 text-white font-bold py-2 px-4 rounded transition-colors duration-300">
             GitHubを見る(コードのリポジリに接続)
         </a>
-        <!-- 「※動画の音量にご注意ください。」のテキストを赤くするため、div.noteで囲みました -->
         <div class="note">
             <p class="mt-2">
                 <span class="text-red-500">
@@ -773,10 +376,8 @@
                 ゲーム内の主要アイテムと、それらが果たす役割について紹介します。
             </p>
             <div class="image-gallery">
-                <!-- 画像のalt属性を修正 -->
                 <img src="Image/アイテム紹介(スイッチ関連).png" alt="スイッチ関連アイテムの紹介画像">
                 <p class="mt-8 text-right"><a href="#table-of-contents" class="text-blue-400 hover:underline">目次に戻る</a></p>
-                <!-- 画像のalt属性を修正 -->
                 <img src="Image/アイテム紹介(カギ).png" alt="鍵とロウソクのアイテム紹介画像">
             </div>
             <p class="mt-8 text-right"><a href="#table-of-contents" class="text-blue-400 hover:underline">目次に戻る</a></p>
@@ -982,7 +583,6 @@
                 <p class="mb-4">
                 CandlEerase Function() 内で UNiagara Component を取得し、SetVisibility() によりロウソクの炎を点火/消火で切り替える演出を実装しています。
                 </p>
-                <!-- 画像のalt属性を修正 -->
                 <img src="Image/NiagaraComponent 使用例.png" alt="NiagaraComponent使用例のコードスニペット" class="code-block" style="background-color: #2d2d2d;">
 
 
@@ -996,15 +596,13 @@
                 <h3 class="subsection-title text-highlight">像を持っているか、または配置されているかの処理</h3>
                 <p class="mb-4">
                 </p>
-                <!-- 画像のalt属性を修正 -->
                 <img src="Image/CandlEeraseFunctionの実際の使用について.png" alt="CandlEeraseFunctionの実際の使用コード" class="code-block" style="background-color: #2d2d2d;">
             </section>
             <p class="mt-8 text-right"><a href="#table-of-contents" class="text-blue-400 hover:underline">目次に戻る</a></p>
         </section>
 
 
-	 <!-- 新しく追加されたBlender作品集のセクション -->
-        <section class="section" id="blender-portfolio">
+	 <section class="section" id="blender-portfolio">
             <p class="mt-8 text-right"><a href="#table-of-contents" class="text-blue-400 hover:underline">目次に戻る</a></p>
             <h2 class="section-title">9.🖼️ Blender作品集</h2>
             <p class="mb-4">
@@ -1026,7 +624,6 @@
         </section>
 
 
-        <!-- 新しいセクションの追加 -->
         <section class="section" id="ue-experience-learning">
             <p class="mt-8 text-right"><a href="#table-of-contents" class="text-blue-400 hover:underline">目次に戻る</a></p>
             <h2 class="section-title">10. 🎮 UnrealEngineの経験と学び</h2>
@@ -1084,7 +681,6 @@
             <p class="mt-8 text-right"><a href="#table-of-contents" class="text-blue-400 hover:underline">目次に戻る</a></p>
         </section>
 
-        <!-- 新しく追加されたUnityの経験と学びセクション -->
         <section class="section" id="unity-experience-learning">
             <p class="mt-8 text-right"><a href="#table-of-contents" class="text-blue-400 hover:underline">目次に戻る</a></p>
             <h2 class="section-title">11. 🎮 Unityの経験と学び</h2>
