@@ -217,7 +217,7 @@ img {
 @media print {
     @page {
         size: A4; /* A4サイズに設定 */
-        margin: 2cm; /* ページの余白 */
+        margin: 0.5cm; /* ページの余白 */
     }
 
     body {
