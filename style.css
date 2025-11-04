@@ -1,392 +1,398 @@
-/* 基本のボディスタイル */
-body {
-    font-family: 'Inter', sans-serif;
-    background-color: #1a1a1a;
-    color: #e0e0e0;
-}
-/* コンテナの最大幅と中央揃え */
-.container {
-    max-width: 960px; /* 画面表示時の最大幅 */
-    margin: 0 auto;
-    padding: 2rem;
-}
-/* ヘッダー/プロフィールセクションのスタイル */
-.header-profile {
-    background-color: #282828;
-    color: white;
-    padding: 2rem;
-    border-radius: 0.75rem;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
-    margin-bottom: 2rem;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
-}
-/* レスポンシブ対応：md以上の画面サイズでのヘッダー/プロフィールスタイル */
-@media (min-width: 768px) {
-    .header-profile {
-        flex-direction: row;
-        align-items: flex-start;
-        text-align: left;
-    }
-}
-/* 各セクションの共通スタイル */
-.section {
-    background-color: #222222;
-    padding: 2rem;
-    border-radius: 0.75rem;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
-    margin-bottom: 2rem;
-    /* 印刷時の改ページを考慮 */
-    page-break-inside: avoid;
-}
-/* セクションタイトルのスタイル */
-.section-title {
-    font-size: 1.75rem;
-    font-weight: 700;
-    color: #e0e0e0;
-    margin-bottom: 1.5rem;
-    border-bottom: 2px solid #4A90E2;
-    padding-bottom: 0.5rem;
-}
-/* サブセクションタイトルのスタイル */
-.subsection-title {
-    font-size: 1.25rem;
-    font-weight: 600;
-    color: #4A90E2;
-    margin-top: 1.5rem;
-    margin-bottom: 1rem;
-}
-/* メインコンテンツのレイアウト */
-.main-content {
-    display: flex;
-    flex-direction: column;
-    gap: 2rem;
-}
-/* レスポンシブ対応：lg以上の画面サイズでのメインコンテンツレイアウト */
-@media (min-width: 1024px) {
-    .main-content {
-        flex-direction: row;
-        gap: 2rem; /* Ensure gap is applied */
-    }
-    .left-panel, .right-panel {
-        flex: 1; /* Make sure both panels take equal space */
-    }
-}
-/* 左パネルのスタイル */
-.left-panel {
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    gap: 2rem;
-}
-/* 右パネルのスタイル */
-.right-panel {
-    flex: 1;
-}
-/* スキル項目のスタイル */
-.skill-item {
-    display: flex;
-    align-items: center;
-    padding: 0.75rem;
-    border-radius: 0.5rem;
-    background-color: #333333;
-    margin-bottom: 0.5rem;
-}
-/* スキルアイコンのスタイル */
-.skill-icon {
-    width: 36px;
-    height: 36px;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 0.8rem;
-    font-weight: bold;
-    color: #fff;
-    margin-right: 0.75rem;
-}
-/* 各スキルアイコンの背景色 */
-.bg-cpp { background-color: #004d99; }
-.bg-cs { background-color: #6a1a8c; }
-.bg-py { background-color: #3b76a0; }
-.bg-js { background-color: #f7df1e; color: #1a1a1a; }
-.bg-ue { background-color: #3366cc; }
-.bg-unity { background-color: #000; }
-.bg-blender { background-color: #f57f17; }
-.bg-gimp { background-color: #756a59; }
-.bg-vsc { background-color: #007acc; }
-.bg-vs { background-color: #5d2b7e; }
-.bg-git { background-color: #333; }
-.bg-office { background-color: #1c4587; }
-.bg-vba { background-color: #0073e6; }
-.bg-video { background-color: #9b59b6; }
-/* タイムライン項目のスタイル */
-.timeline-item {
-    position: relative;
-    padding-left: 20px;
-    margin-bottom: 2rem;
-    page-break-inside: avoid; /* 印刷時の改ページを考慮 */
-}
-/* タイムラインマーカーのスタイル */
-.timeline-marker {
-    position: absolute;
-    left: 0;
-    top: 5px;
-    width: 8px;
-    height: 8px;
-    background-color: #4A90E2;
-    border-radius: 50%;
-}
-/* コードブロックのスタイル */
-.code-block {
-    background-color: #2d2d2d;
-    padding: 1rem;
-    border-radius: 0.5rem;
-    overflow-x: auto;
-    page-break-inside: avoid; /* 印刷時の改ページを考慮 */
-}
-/* テーブルの共通スタイル */
-.lib-table {
-    width: 100%;
-    border-collapse: collapse;
-    margin-bottom: 20px;
-    font-size: 14px;
-    background-color: #1a1a1a;
-    color: white;
-    page-break-inside: avoid; /* 印刷時の改ページを考慮 */
-}
-.lib-table th, .lib-table td {
-    padding: 12px;
-    text-align: left;
-    border-bottom: 1px solid #333;
-}
-.lib-table th {
-    background-color: #2a2a2a;
-    color: #fff;
-    font-weight: bold;
-}
-.lib-table tbody tr:nth-child(odd) {
-    background-color: #1a1a1a;
-}
-.lib-table tbody tr:nth-child(even) {
-    background-color: #222222;
-}
-.lib-table tbody tr:hover {
-    background-color: #444;
-}
-/* リンクの色とホバー時の下線 */
-.text-blue-400 {
-    color: #60a5fa; /* 青色 */
-}
-.hover\:underline:hover {
-    text-decoration: underline; /* マウスを乗せた時に下線をつける */
-}
-/* ハイライト用の新しい色 */
-.text-highlight {
-    color: #b1b1b1; /* 明るいオレンジ色 */
-}
-/* 動画のスタイル */
-video {
-    width: 100%;
-    max-width: 800px;
-    height: auto;
-    display: block;
-    margin: 1.5rem auto;
-    border-radius: 0.75rem;
-    page-break-inside: avoid; /* 印刷時の改ページを考慮 */
-}
-/* 画像のスタイル */
-img {
-    max-width: 100%;
-    height: auto;
-    border-radius: 0.5rem;
-    margin-bottom: 1rem;
-    display: block;
-    margin-left: auto;
-    margin-right: auto;
-    page-break-inside: avoid; /* 印刷時の改ページを考慮 */
-}
-/* GitHubリンクの色調整 */
-.text-blue-400 {
-    color: #60a5fa;
-}
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>自己紹介ポートフォリオ (ダークテーマ)</title>
+    <!-- Tailwind CSSをCDNで読み込み -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        /* ========================================================================= */
+        /* 提供されたCSS全体をここに統合し、HTML要素にクラスとして適用可能にする */
+        /* ========================================================================= */
 
-/* 印刷用スタイル */
-@media print {
-    @page {
-        size: A4; /* A4サイズに設定 */
-        margin: 0.5cm; /* ページの余白 */
-    }
+        /* 基本のボディスタイル */
+        body {
+            font-family: 'Inter', "Noto Sans JP", sans-serif;
+            background-color: #000000; /* 完全な黒に変更 */
+            color: #ffffff; /* テキストの色を白に変更 */
+            line-height: 1.6;
+            padding: 2rem;
+            min-height: 100vh;
+        }
 
-    body {
-        background-color: #ffffff !important; /* 背景を白に */
-        color: #333333 !important; /* テキストを黒に */
-        -webkit-print-color-adjust: exact; /* 背景色や画像を印刷する設定 */
-        print-color-adjust: exact;
-        width: 21cm; /* A4の幅 */
-        min-height: 29.7cm; /* A4の高さ */
-    }
+        /* コンテナの最大幅と中央揃え */
+        .container {
+            max-width: 960px; /* 画面表示時の最大幅 */
+            margin: 0 auto;
+            padding: 2rem;
+        }
+        
+        /* 各セクションの共通スタイル (現在は自己紹介ボックスのみに使用) */
+        .section {
+            background-color: #1a1a1a; /* セクションの背景色を少し明るい黒に変更 */
+            padding: 2rem;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.5); /* 影をより目立つように変更 */
+            margin-bottom: 2rem;
+            page-break-inside: avoid;
+        }
+        
+        /* セクションタイトルのスタイル (h1, h2などに適用) */
+        .section-title {
+            font-size: 2rem;
+            font-weight: bold;
+            color: #ffffff;
+            border-bottom: 2px solid #4a5568; /* 区切り線の色 */
+            padding-bottom: 0.5rem;
+            margin-bottom: 1.5rem;
+        }
+        
+        /* サブセクションタイトルのスタイル */
+        .subsection-title {
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: #4A90E2;
+            margin-top: 1.5rem;
+            margin-bottom: 1rem;
+        }
+        
+        /* スキル項目のスタイル (新規追加) */
+        .skill-item {
+            display: flex;
+            align-items: center;
+            padding: 1rem;
+            border-radius: 0.75rem;
+            background-color: #282828; /* 画像のカード背景色に合わせる */
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
 
-    .container {
-        width: 100%; /* A4幅に合わせる */
-        max-width: 100%;
-        padding: 0; /* 印刷時はpaddingをリセット */
-    }
+        .skill-item:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 10px rgba(74, 144, 226, 0.3); /* ホバー時に青い影 */
+        }
 
-    .header-profile, .section {
-        background-color: #f0f0f0 !important; /* 背景色を明るく */
-        color: #333333 !important;
-        box-shadow: none !important; /* 影を消す */
-        border: 1px solid #cccccc !important; /* 薄い枠線 */
-        page-break-inside: avoid; /* セクションの途中で改ページしない */
-        margin-bottom: 1.5rem !important; /* 印刷時のセクション間隔 */
-    }
+        /* スキルアイコンのスタイル (新規追加) */
+        .skill-icon {
+            width: 40px;
+            height: 40px;
+            min-width: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.8rem;
+            font-weight: bold;
+            color: #fff;
+            margin-right: 1rem;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.4);
+        }
+        
+        /* 各スキルアイコンの背景色 */
+        .bg-cpp { background-color: #004d99; }
+        .bg-cs { background-color: #6a1a8c; }
+        .bg-py { background-color: #3b76a0; }
+        .bg-js { background-color: #f7df1e; color: #1a1a1a; }
+        .bg-ue { background-color: #3366cc; }
+        .bg-unity { background-color: #000; }
+        .bg-blender { background-color: #f57f17; }
+        .bg-gimp { background-color: #756a59; }
+        .bg-vsc { background-color: #007acc; }
+        .bg-vs { background-color: #5d2b7e; }
+        .bg-git { background-color: #333; }
+        .bg-office { background-color: #1c4587; }
+        .bg-vba { background-color: #0073e6; }
+        .bg-video { background-color: #9b59b6; }
+        
+        /* タイムライン項目のスタイル */
+        .timeline-item {
+            position: relative;
+            padding-left: 20px;
+            margin-bottom: 2rem;
+            page-break-inside: avoid; /* 印刷時の改ページを考慮 */
+        }
 
-    .section-title {
-        color: #000000 !important; /* タイトル色を黒に */
-        border-bottom-color: #6699ff !important; /* ボーダー色を調整 */
-    }
+        /* リンクの色 */
+        .text-blue-400 { color: #60a5fa; }
+        .hover\:underline:hover { text-decoration: underline; }
 
-    .subsection-title {
-        color: #3366cc !important; /* サブタイトル色を調整 */
-    }
+        /* 画像グリッドのスタイル（提供された追加のスタイル） */
+        .image-grid {
+            display: flex;
+            flex-wrap: wrap; 
+            gap: 16px;
+            justify-content: center;
+        }
+        .image-grid img {
+            width: 100%;
+            max-width: 400px;
+            height: auto;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+            object-fit: cover;
+        }
+        .image-grid .large-img {
+            max-width: 600px;
+        }
+        @media (min-width: 640px) {
+            .image-grid img {
+                width: calc(50% - 8px);
+            }
+        }
+        @media (min-width: 960px) {
+            .image-grid img {
+                width: calc(33.333% - 16px);
+            }
+            .image-grid .large-img {
+                width: 100%;
+            }
+        }
+        
+        /* 印刷用スタイル（提供された完全なブロック） */
+        @media print {
+            @page {
+                size: A4;
+                margin: 0.5cm;
+            }
+        
+            body {
+                background-color: #ffffff !important;
+                color: #333333 !important;
+                -webkit-print-color-adjust: exact;
+                print-color-adjust: exact;
+                width: 21cm;
+                min-height: 29.7cm;
+            }
+        
+            .container {
+                width: 100%;
+                max-width: 100%;
+                padding: 0;
+            }
+        
+            .header-profile, .section {
+                background-color: #f0f0f0 !important;
+                color: #333333 !important;
+                box-shadow: none !important;
+                border: 1px solid #cccccc !important;
+                page-break-inside: avoid;
+                margin-bottom: 1.5rem !important;
+            }
+        
+            .section-title {
+                color: #000000 !important;
+                border-bottom-color: #6699ff !important;
+            }
+        
+            .subsection-title {
+                color: #3366cc !important;
+            }
+        
+            .bg-black, .bg-gray-800 {
+                background-color: #e0e0e0 !important;
+                color: #333333 !important;
+            }
+        
+            a {
+                color: #0000cc !important;
+                text-decoration: underline !important;
+            }
+        
+            .skill-icon {
+                background-color: #cccccc !important;
+                color: #333333 !important;
+                border: 1px solid #999999;
+            }
+        
+            img, video {
+                max-width: 90% !important;
+                border-radius: 0 !important;
+                box-shadow: none !important;
+                margin: 1rem auto !important;
+            }
+        
+            .code-block {
+                background-color: #f8f8f8 !important;
+                border: 1px solid #cccccc !important;
+                color: #333333 !important;
+                page-break-inside: avoid;
+            }
+        
+            .lib-table {
+                background-color: #f0f0f0 !important;
+                color: #333333 !important;
+                border: 1px solid #cccccc !important;
+            }
+            .lib-table th {
+                background-color: #e0e0e0 !important;
+                color: #000000 !important;
+                border-bottom: 1px solid #999999 !important;
+            }
+            .lib-table td {
+                border-bottom: 1px solid #e0e0e0 !important;
+            }
+            .lib-table tbody tr:nth-child(odd) {
+                background-color: #f8f8f8 !important;
+            }
+            .lib-table tbody tr:nth-child(even) {
+                background-color: #f0f0f0 !important;
+            }
+            .lib-table tbody tr:hover {
+                background-color: #e0e0e0 !important;
+            }
+        
+            .text-blue-400 { color: #0000cc !important; }
+            .text-red-500 { color: #cc0000 !important; }
+            .text-gray-400 { color: #666666 !important; }
+        }
+    </style>
+</head>
+<body>
 
-    .bg-black, .bg-gray-800 {
-        background-color: #e0e0e0 !important; /* 背景色を明るく */
-        color: #333333 !important;
-    }
+    <!-- コンテンツを中央に配置するためのラッパー -->
+    <!-- paddingはbodyで設定済みのため、ここでは不要 -->
+    <div class="container">
 
-    /* リンクは色を残し、下線は印刷時も表示 */
-    a {
-        color: #0000cc !important;
-        text-decoration: underline !important;
-    }
+        <!-- ヘッダー/メインタイトル (section-titleクラスを適用) -->
+        <h1 class="section-title text-3xl">
+            自己紹介 (キャリアとスキル)
+        </h1>
 
-    /* 各スキルアイコンの背景色を調整 */
-    .skill-icon {
-        background-color: #cccccc !important; /* 背景を明るく */
-        color: #333333 !important; /* 文字色を濃く */
-        border: 1px solid #999999;
-    }
+        <!-- 自己紹介ボックス -->
+        <div class="section space-y-4 border-l-4 border-blue-400">
+            
+            <!-- 1. 現在の状況 -->
+            <p class="text-base text-gray-300 leading-relaxed">
+                現在、就労移行支援事業所 Kaien千歳烏山で職業訓練に参加している川口拓郎と申します。
+            </p>
+            
+            <!-- 2. スキル・経験 -->
+            <p class="text-base text-gray-300 leading-relaxed">
+                専門学校でC#とUnityを、独学ではC++、JavaScript、Python、UnrealEngine5、BlenderやGIMP、サウンドエフェクト(SE)など多岐にわたるツールを経験しました。
+            </p>
+            
+            <!-- 3. 事業所での訓練内容 (前半) -->
+            <p class="text-base text-gray-300 leading-relaxed">
+                就労移行支援事業所では、週替業務（2週間ごとに職種が変わる訓練で、OfficeやGoogle Workspaceを使った資料作成を、個人またはグループで行う訓練）に取り組みました。
+            </p>
+            
+            <!-- 4. 事業所での訓練内容 (後半) -->
+            <p class="text-base text-gray-300 leading-relaxed">
+                他にも、Excelのマクロ・VBA訓練、IT登竜門（プログラマ・Webデザイナ・インフラエンジニア・DXエンジニア職業体験）、UnrealEngine5、C++でのゲーム開発など、多岐にわたる訓練中に取り組みました。
+            </p>
+            
+            <!-- 5. 現在の学習目標 -->
+            <p class="text-base text-gray-300 leading-relaxed">
+                現在は週替業務の訓練に取り組みつつ、帰宅後はUdemy講座で、Unreal Engine5を活用したアクション及びオンラインゲーム開発学習にも挑戦しています。
+            </p>
 
-    /* 画像と動画はサイズを調整し、影をなくす */
-    img, video {
-        max-width: 90% !important; /* 印刷時の画像サイズ調整 */
-        border-radius: 0 !important;
-        box-shadow: none !important;
-        margin: 1rem auto !important;
-    }
+        </div>
 
-    .code-block {
-        background-color: #f8f8f8 !important; /* コードブロックの背景を明るく */
-        border: 1px solid #cccccc !important;
-        color: #333333 !important;
-        page-break-inside: avoid;
-    }
+        <!-- スキル・ツールセクション -->
+        <div class="section">
+            <h2 class="section-title">
+                スキル・ツール
+            </h2>
+            
+            <!-- レスポンシブグリッド: モバイルでは1列、md以上で2列 -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                
+                <!-- 1. C++ -->
+                <div class="skill-item">
+                    <div class="skill-icon bg-cpp">C++</div>
+                    <span class="text-lg font-semibold">C++</span>
+                </div>
 
-    /* テーブルの印刷時スタイル調整 */
-    .lib-table {
-        background-color: #f0f0f0 !important;
-        color: #333333 !important;
-        border: 1px solid #cccccc !important;
-    }
-    .lib-table th {
-        background-color: #e0e0e0 !important;
-        color: #000000 !important;
-        border-bottom: 1px solid #999999 !important;
-    }
-    .lib-table td {
-        border-bottom: 1px solid #e0e0e0 !important;
-    }
-    .lib-table tbody tr:nth-child(odd) {
-        background-color: #f8f8f8 !important;
-    }
-    .lib-table tbody tr:nth-child(even) {
-        background-color: #f0f0f0 !important;
-    }
-    .lib-table tbody tr:hover {
-        background-color: #e0e0e0 !important; /* ホバー効果は印刷では不要だが念のため調整 */
-    }
+                <!-- 2. C# -->
+                <div class="skill-item">
+                    <div class="skill-icon bg-cs">C#</div>
+                    <span class="text-lg font-semibold">C#</span>
+                </div>
 
-    /* 目次のリンク色も調整 */
-    .text-blue-400 {
-        color: #0000cc !important;
-    }
-    .text-red-500 {
-        color: #cc0000 !important;
-    }
-    .text-gray-400 {
-        color: #666666 !important;
-    }
-}
+                <!-- 3. Python -->
+                <div class="skill-item">
+                    <div class="skill-icon bg-py">Py</div>
+                    <span class="text-lg font-semibold">Python</span>
+                </div>
 
-body {
-    font-family: 'Inter', sans-serif;
-    background-color: #000000; /* 背景を完全な黒に変更 */
-    color: #ffffff; /* テキストの色を白に変更 */
-    line-height: 1.6;
-}
-.container {
-    max-width: 960px;
-    margin: 0 auto;
-    padding: 2rem;
-}
-.section {
-    background-color: #1a1a1a; /* セクションの背景色を少し明るい黒に変更 */
-    padding: 2rem;
-    margin-bottom: 2rem;
-    border-radius: 12px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.5); /* 影をより目立つように変更 */
-}
-.section-title {
-    font-size: 2rem;
-    font-weight: bold;
-    color: #ffffff; /* タイトルの色を白に変更 */
-    border-bottom: 2px solid #4a5568; /* 区切り線の色も変更 */
-    padding-bottom: 0.5rem;
-    margin-bottom: 1.5rem;
-}
-.text-blue-400 {
-    color: #60a5fa;
-}
-.hover\:underline:hover {
-    text-decoration: underline;
-}
-/* Flexboxを使った画像グリッドのスタイル */
-.image-grid {
-    display: flex;
-    flex-wrap: wrap; /* 画像が画面幅に応じて折り返すように設定 */
-    gap: 16px; /* 画像間の隙間 */
-    justify-content: center; /* 画像を中央揃えにする */
-}
-.image-grid img {
-    width: 100%; /* 小さい画面では幅いっぱいにする */
-    max-width: 400px; /* 画像の最大幅 */
-    height: auto; /* 画像の縦横比を維持 */
-    border-radius: 8px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
-    object-fit: cover;
-}
-/* 大きく表示する画像のスタイル */
-.image-grid .large-img {
-    max-width: 600px; /* 通常の画像より大きく表示 */
-}
+                <!-- 4. JavaScript -->
+                <div class="skill-item">
+                    <div class="skill-icon bg-js">JS</div>
+                    <span class="text-lg font-semibold text-gray-900">JavaScript</span>
+                </div>
 
-/* 画面幅が640px以上の場合のスタイル */
-@media (min-width: 640px) {
-    .image-grid img {
-        width: calc(50% - 8px); /* 2列表示にする */
-    }
-}
-/* 画面幅が960px以上の場合のスタイル */
-@media (min-width: 960px) {
-    .image-grid img {
-        width: calc(33.333% - 16px); /* 3列表示にする */
-    }
-    /* 大きく表示する画像は1列で表示 */
-    .image-grid .large-img {
-        width: 100%;
-    }
-}
+                <!-- 5. Unreal Engine -->
+                <div class="skill-item">
+                    <div class="skill-icon bg-ue">UE</div>
+                    <span class="text-lg font-semibold">Unreal Engine</span>
+                </div>
+
+                <!-- 6. Unity -->
+                <div class="skill-item">
+                    <div class="skill-icon bg-unity">Unity</div>
+                    <span class="text-lg font-semibold">Unity</span>
+                </div>
+
+                <!-- 7. Blender -->
+                <div class="skill-item">
+                    <div class="skill-icon bg-blender">Bl</div>
+                    <span class="text-lg font-semibold">Blender</span>
+                </div>
+
+                <!-- 8. GIMP / Canva -->
+                <div class="skill-item">
+                    <div class="skill-icon bg-gimp">GIMP</div>
+                    <div>
+                        <span class="text-lg font-semibold">GIMP / Canva</span>
+                    </div>
+                </div>
+
+                <!-- 9. VSCode -->
+                <div class="skill-item">
+                    <div class="skill-icon bg-vsc">VSCode</div>
+                    <span class="text-lg font-semibold">Visual Studio Code</span>
+                </div>
+
+                <!-- 10. Visual Studio -->
+                <div class="skill-item">
+                    <div class="skill-icon bg-vs">VS</div>
+                    <span class="text-lg font-semibold">Visual Studio</span>
+                </div>
+
+                <!-- 11. GitHub / SourceTree -->
+                <div class="skill-item">
+                    <div class="skill-icon bg-git">git</div>
+                    <span class="text-lg font-semibold">GitHub / SourceTree</span>
+                </div>
+                
+                <!-- 12. Office製品 -->
+                <div class="skill-item">
+                    <div class="skill-icon bg-office">Office</div>
+                    <div>
+                        <span class="text-lg font-semibold">Office製品</span>
+                        <p class="text-sm text-gray-400">Excel、PowerPoint、Word</p>
+                    </div>
+                </div>
+
+                <!-- 13. VBA・マクロ -->
+                <div class="skill-item">
+                    <div class="skill-icon bg-vba">VBA</div>
+                    <span class="text-lg font-semibold">VBA・マクロ</span>
+                </div>
+                
+                <!-- 14. 動画・音源編集 -->
+                <div class="skill-item">
+                    <div class="skill-icon bg-video">Vid</div>
+                    <div>
+                        <span class="text-lg font-semibold">動画・音源編集</span>
+                        <p class="text-sm text-gray-400">MoviStudio13, VideoProc Vlogger, DPS Action, Wavosaur</p>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        
+    </div>
+
+</body>
+</html>
