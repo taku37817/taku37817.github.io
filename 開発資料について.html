@@ -3,291 +3,454 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ゲーム開発ドキュメント目次</title>
+    <title>ゲーム開発ドキュメント目次 | Mystery Solving Dungeon</title>
+    <!-- InterフォントとTailwind CSSを読み込み -->
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
+        /* ----------------------
+         * スクリーン表示用スタイル
+         * ---------------------- */
+        :root {
+            --primary-blue: #90cdf4;
+            --secondary-blue: #63b3ed;
+            --bg-dark: #000000;
+            --card-dark: #1a1a1a;
+            --content-dark: #2d3748;
+        }
+
         body {
             font-family: "Inter", sans-serif;
-            background-color: #000000;
+            background-color: var(--bg-dark);
             color: #ffffff;
             line-height: 1.6;
         }
         .container {
-            max-width: 960px;
+            max-width: 1100px;
             margin: 40px auto;
             padding: 30px;
-            background-color: #1a1a1a;
-            border-radius: 12px;
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+            background-color: var(--card-dark);
+            border-radius: 16px;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.5);
         }
         h1 {
-            color: #90cdf4;
-            font-size: 2.5rem;
-            font-weight: bold;
+            color: var(--primary-blue);
+            font-size: 3rem;
+            font-weight: 800;
             text-align: center;
             margin-bottom: 30px;
-            padding-bottom: 15px;
-            border-bottom: 3px solid #63b3ed;
+            padding-bottom: 20px;
+            border-bottom: 4px solid var(--secondary-blue);
         }
         h2 {
-            color: #cbd5e0;
-            font-size: 1.75rem;
-            font-weight: 600;
-            margin-top: 25px;
-            margin-bottom: 15px;
-            padding-left: 10px;
-            border-left: 5px solid #718096;
+            color: #ffffff;
+            font-size: 2rem;
+            font-weight: 700;
+            margin-top: 40px;
+            margin-bottom: 20px;
+            padding-left: 15px;
+            border-left: 6px solid #f6ad55;
         }
         h3 {
-            font-size: 1.25rem;
+            font-size: 1.5rem;
             font-weight: 600;
-            color: #cbd5e0;
-            margin-bottom: 10px;
-            border-bottom: 1px dashed #4a5568;
+            color: #f6ad55;
+            margin-bottom: 15px;
             padding-bottom: 5px;
-        }
-        ul {
-            list-style: none;
-            padding-left: 0;
-            margin-left: 15px;
-        }
-        li {
-            margin-bottom: 4px;
-            padding: 3px 0;
-        }
-        li a {
-            color: #90cdf4;
-            text-decoration: none;
-            transition: color 0.2s ease-in-out;
-        }
-        li a:hover {
-            color: #63b3ed;
-            text-decoration: underline;
-        }
-        .sub-list {
-            padding-left: 20px;
-            list-style: disc;
-        }
-        .sub-list li {
-            margin-bottom: 2px;
         }
         .section-content {
             margin-top: 15px;
-            margin-bottom: 20px;
-            padding: 15px 20px;
-            background-color: #2d3748;
-            border-left: 3px solid #718096;
-            border-radius: 8px;
-            font-size: 0.95rem;
+            padding: 20px;
+            background-color: var(--content-dark);
+            border-left: 5px solid var(--secondary-blue);
+            border-radius: 10px;
+            font-size: 1rem;
             color: #ffffff;
         }
-        .section-content img {
-            max-width: 100%;
-            height: auto;
-            border-radius: 8px;
-            margin-top: 10px;
-            margin-bottom: 10px;
-            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
-        }
-        .note {
-            margin-top: 30px;
-            padding: 15px;
-            background-color: #2d3748;
-            border-left: 5px solid #a0aec0;
-            border-radius: 8px;
-            color: #ffffff;
-        }
-        .back-to-top {
-            display: block;
-            text-align: right;
-            margin-top: 15px;
-            font-size: 0.9rem;
+        
+        /* カルーセル用スタイル */
+        .carousel-container {
+            position: relative;
+            overflow: hidden;
+            border-radius: 10px;
             background-color: #000;
-            padding: 5px;
-            border-radius: 5px;
+            margin-bottom: 20px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.4);
         }
-        .back-to-top a {
-            color: #ffffff;
-            text-decoration: none;
-            display: inline-flex;
-            align-items: center;
-            font-size: 1.1rem;
-        }
-        .back-to-top a:hover {
-            text-decoration: underline;
-        }
-        .back-to-top svg {
-            margin-right: 5px;
-        }
-        table {
-            border-color: #4a5568;
-        }
-        table thead tr {
-            background-color: #4a5568;
-        }
-        table th, table td {
-            border-color: #4a5568;
-            color: #ffffff;
-        }
-        .flex-container {
+        .carousel-slides {
             display: flex;
-            gap: 20px;
-            flex-wrap: wrap;
-            justify-content: space-between;
+            transition: transform 0.5s ease-in-out;
         }
-        .flex-item {
-            flex: 1 1 45%;
-            min-width: 300px;
+        .carousel-slide {
+            min-width: 100%;
+            box-sizing: border-box;
+            padding: 20px;
+            text-align: center;
+        }
+        .carousel-slide img {
+            max-width: 100%;
+            max-height: 60vh;
+            height: auto;
+            object-fit: contain;
+            border-radius: 8px;
+            margin: 10px auto;
+            display: block;
+        }
+        .carousel-nav-btn {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background-color: rgba(0, 0, 0, 0.5);
+            color: white;
+            border: none;
+            padding: 15px 10px;
+            cursor: pointer;
+            z-index: 10;
+            opacity: 0.8;
+            transition: opacity 0.3s, background-color 0.3s;
+        }
+        .carousel-nav-btn:hover {
+            opacity: 1;
+            background-color: rgba(0, 0, 0, 0.7);
+        }
+        .carousel-prev { left: 0; border-radius: 0 10px 10px 0; }
+        .carousel-next { right: 0; border-radius: 10px 0 0 10px; }
+        .carousel-indicators {
+            text-align: center;
+            padding: 10px 0;
+            background-color: rgba(0, 0, 0, 0.3);
+        }
+        .carousel-indicator {
+            display: inline-block;
+            width: 10px;
+            height: 10px;
+            margin: 0 5px;
+            background-color: #718096;
+            border-radius: 50%;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        .carousel-indicator.active {
+            background-color: var(--secondary-blue);
+        }
+
+        /* 印刷用スタイル (@media print) */
+        @media print {
+            @page {
+                size: A4 portrait;
+                margin: 15mm 15mm 15mm 15mm;
+            }
+            /* 画面表示用のカルーセルとナビゲーションは非表示 */
+            .carousel-container, .carousel-nav-btn, .carousel-indicators {
+                display: none !important;
+            }
+            /* 印刷専用の企画書コンテンツを表示 */
+            #print-section1, #print-section-flow, #print-section-cpp-docs {
+                display: block !important;
+                page-break-before: always;
+            }
+            .print-slide {
+                page-break-inside: avoid;
+                margin-bottom: 20pt;
+                border-bottom: 1px dashed #ccc;
+                padding-bottom: 10pt;
+            }
+            .print-slide h3 {
+                color: black !important;
+                font-size: 14pt;
+                margin-top: 15pt;
+            }
+            .print-slide img {
+                max-width: 100% !important;
+                height: auto !important;
+                /* 印刷カルーセル内の画像中央寄せ */
+                margin-left: auto;
+                margin-right: auto;
+            }
+
+            /* --- ▼▼▼ ここから修正 ▼▼▼ --- */
+
+            /* 単独セクション（テスト仕様書のみ）内の画像の印刷スタイルを定義 */
+            #content-section8 img {
+                max-width: 100% !important; /* ページの幅に合わせる */
+                height: auto !important;
+                max-height: 80vh; /* 高さを制限してタイトルと収まるように */
+                object-fit: contain;
+                display: block;
+                margin-top: 10pt; /* タイトルとの間に少し余白 */
+                /* 画像を中央寄せにする */
+                margin-left: auto;
+                margin-right: auto;
+            }
+
+            /* その他の印刷設定（元のコードから抜粋） */
+            body { background-color: white !important; color: black !important; -webkit-print-color-adjust: exact; }
+            .container { max-width: 100% !important; margin: 0; padding: 0; box-shadow: none; background-color: white !important; }
+            .back-to-top, .note, hr, .flex-container .back-to-top { display: none !important; }
+            .bg-blue-900, .section-content { background-color: white !important; border: none !important; padding: 0 !important; box-shadow: none !important; }
+            h1, h2, h3 { color: black !important; border-bottom: 1px solid #ccc !important; padding-bottom: 5px !important; }
+            h1 { font-size: 20pt; text-align: left; margin-bottom: 15pt; }
+            h2 { font-size: 16pt; margin-top: 20pt; margin-bottom: 10pt; border-left: 5px solid #ccc !important; }
+            .flex-container { display: block; gap: 0; }
+            .flex-item { min-width: 100%; }
+            
+            /* 各主要セクションの改ページを維持しつつ、セクション内での改ページを禁止 */
+            #content-section-flow,
+            #content-section-cpp-docs, /* C++ドキュメントセクションを追加 */
+            #content-section8 {
+                page-break-before: always; /* 項目ごとに新しいページから開始 */
+                page-break-inside: avoid;  /* ★★★ タイトルと画像が分離しないようにする ★★★ */
+                margin-top: 0;
+            }
+            /* --- ▲▲▲ ここまで修正 ▲▲▲ --- */
         }
     </style>
 </head>
 <body class="p-4 sm:p-6 md:p-8">
-    <div class="container rounded-xl shadow-lg">
-        <h1 class="rounded-t-xl" id="top">ドキュメント目次</h1>
+    <div class="container rounded-2xl shadow-xl">
+        <h1 class="rounded-t-xl" id="top">🎮 ゲーム開発ドキュメント目次 📝</h1>
 
-        <section id="table-of-contents" class="mb-12 p-5 bg-blue-900 rounded-lg shadow-inner"> 
-            <h2 class="text-xl font-bold text-blue-300 mb-4 border-b pb-2 border-blue-600">概要</h2> 
+        <!-- 目次 -->
+        <section id="table-of-contents" class="mb-12 p-5 bg-blue-900 rounded-xl shadow-lg transition duration-300 hover:shadow-2xl"> 
+            <h2 class="text-2xl font-bold text-yellow-300 mb-4 border-b pb-2 border-yellow-600">📖 概要と目次</h2> 
             <ul class="list-none p-0">
                 <li class="mb-2">
-                    <a href="#content-section1" class="text-lg font-medium text-blue-300 hover:text-blue-100">1. 企画書</a> 
-                    <ul class="sub-list mt-1">
-                        <li><a href="#content-section1-1">タイトル</a></li>
-                        <li><a href="#content-section1-2">ゲーム内容について</a></li>
-                        <li><a href="#content-section1-3">画面操作方法</a></li>
-                        <li><a href="#content-section1-4">謎解き要素①</a></li>
-                        <li><a href="#content-section1-5">謎解き要素②</a></li>
-                        <li><a href="#content-section1-6">謎解き要素③</a></li>
-                        <li><a href="#content-section1-7">謎解き要素④</a></li>
-                    </ul>
+                    <a href="#content-section1" class="text-xl font-medium text-primary-blue hover:text-secondary-blue">1. 企画書 (スライド表示)</a> 
                 </li>
-                <li class="mb-2"><a href="#content-section2" class="text-lg font-medium text-blue-300 hover:text-blue-100">2. タイトル画面のフロー</a></li>
-                <li class="mb-2"><a href="#content-section-flow-group" class="text-lg font-medium text-blue-300 hover:text-blue-100">3. ゲーム画面 & クリア条件フロー</a></li>
-                <li class="mb-2"><a href="#content-section4" class="text-lg font-medium text-blue-300 hover:text-blue-100">4. 各謎解きの基本フロー</a></li>
-                <li class="mb-2"><a href="#content-section6" class="text-lg font-medium text-blue-300 hover:text-blue-100">5. DoorMover.h ドキュメントについて</a></li>
-                <li class="mb-2"><a href="#content-section7" class="text-lg font-medium text-blue-300 hover:text-blue-100">6. DoorMover.cpp ドキュメントについて</a></li>
-                <li class="mb-2"><a href="#content-section8" class="text-lg font-medium text-blue-300 hover:text-blue-100">7. テスト仕様書のご紹介（一部から抜粋）になります。</a></li>
+                <li class="mb-2">
+                    <a href="#content-section-flow" class="text-xl font-medium text-primary-blue hover:text-secondary-blue">2. フロー図全体 (スライド表示)</a>
+                </li>
+                <!-- ▼▼▼ 3と4を統合し、5を4に変更 ▼▼▼ -->
+                <li class="mb-2">
+                    <a href="#content-section-cpp-docs" class="text-xl font-medium text-primary-blue hover:text-secondary-blue">3. C++ドキュメント (スライド表示)</a>
+                </li>
+                <li class="mb-2">
+                    <a href="#content-section8" class="text-xl font-medium text-primary-blue hover:text-secondary-blue">4. テスト仕様書のご紹介（抜粋）</a>
+                </li>
+                <!-- ▲▲▲ ここまで修正 ▲▲▲ -->
             </ul>
         </section>
 
         <hr class="my-10 border-gray-700"> 
-        <h2 class="text-3xl font-bold text-gray-200 mb-6">本編</h2> 
+        <h2 class="text-3xl font-bold text-gray-100 mb-6">📌 本編ドキュメント</h2> 
+        
+        <!-- 1. 企画書 (カルーセル) -->
         <section id="content-section1" class="mb-12">
-            <h2>1. 企画書</h2>
+            <h2>1. 企画書 (スライドショー)</h2>
+            <p class="text-sm text-gray-400 mb-4">→ 画像をクリックすると、詳細な資料を全画面で確認できます。</p>
             <div class="section-content">
-                
-                <h3 id="content-section1-1">タイトル</h3>
-                <div class="back-to-top"><a href="#top"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-up-circle-fill" viewBox="0 0 16 16"><path d="M16 8A8 8 0 1 0 0 8a8 8 0 0 0 16 0zm-7.5 3.5a.5.5 0 0 1-1 0V5.707L5.354 7.854a.5.5 0 1 1-.708-.708l3-3a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1-.708.708L8.5 5.707V11.5z"/></svg>目次に戻る</a></div>
-                <img src="開発資料/企画書の画像/[企画]Mystery Solving Dungeon 修正後_page-0002.jpg">
-                <div class="back-to-top"><a href="#top"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-up-circle-fill" viewBox="0 0 16 16"><path d="M16 8A8 8 0 1 0 0 8a8 8 0 0 0 16 0zm-7.5 3.5a.5.5 0 0 1-1 0V5.707L5.354 7.854a.5.5 0 1 1-.708-.708l3-3a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1-.708.708L8.5 5.707V11.5z"/></svg>目次に戻る</a></div>
-
-                <h3 id="content-section1-2">ゲーム内容について</h3>
-                <div class="back-to-top"><a href="#top"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-up-circle-fill" viewBox="0 0 16 16"><path d="M16 8A8 8 0 1 0 0 8a8 8 0 0 0 16 0zm-7.5 3.5a.5.5 0 0 1-1 0V5.707L5.354 7.854a.5.5 0 1 1-.708-.708l3-3a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1-.708.708L8.5 5.707V11.5z"/></svg>目次に戻る</a></div>
-                <img src="開発資料/企画書の画像/[企画]Mystery Solving Dungeon 修正後_page-0003.jpg">
-                <div class="back-to-top"><a href="#top"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-up-circle-fill" viewBox="0 0 16 16"><path d="M16 8A8 8 0 1 0 0 8a8 8 0 0 0 16 0zm-7.5 3.5a.5.5 0 0 1-1 0V5.707L5.354 7.854a.5.5 0 1 1-.708-.708l3-3a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1-.708.708L8.5 5.707V11.5z"/></svg>目次に戻る</a></div>
-                
-                <h3 id="content-section1-3">画面操作方法</h3>
-                <div class="back-to-top"><a href="#top"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-up-circle-fill" viewBox="0 0 16 16"><path d="M16 8A8 8 0 1 0 0 8a8 8 0 0 0 16 0zm-7.5 3.5a.5.5 0 0 1-1 0V5.707L5.354 7.854a.5.5 0 1 1-.708-.708l3-3a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1-.708.708L8.5 5.707V11.5z"/></svg>目次に戻る</a></div>
-                <img src="開発資料/企画書の画像/[企画]Mystery Solving Dungeon 修正後_page-0004.jpg">
-                <div class="back-to-top"><a href="#top"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-up-circle-fill" viewBox="0 0 16 16"><path d="M16 8A8 8 0 1 0 0 8a8 8 0 0 0 16 0zm-7.5 3.5a.5.5 0 0 1-1 0V5.707L5.354 7.854a.5.5 0 1 1-.708-.708l3-3a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1-.708.708L8.5 5.707V11.5z"/></svg>目次に戻る</a></div>
-
-                <h3 id="content-section1-4">謎解き要素①</h3>
-                <div class="back-to-top"><a href="#top"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-up-circle-fill" viewBox="0 0 16 16"><path d="M16 8A8 8 0 1 0 0 8a8 8 0 0 0 16 0zm-7.5 3.5a.5.5 0 0 1-1 0V5.707L5.354 7.854a.5.5 0 1 1-.708-.708l3-3a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1-.708.708L8.5 5.707V11.5z"/></svg>目次に戻る</a></div>
-                <img src="開発資料/企画書の画像/[企画]Mystery Solving Dungeon 修正後_page-0005.jpg">
-                <div class="back-to-top"><a href="#top"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-up-circle-fill" viewBox="0 0 16 16"><path d="M16 8A8 8 0 1 0 0 8a8 8 0 0 0 16 0zm-7.5 3.5a.5.5 0 0 1-1 0V5.707L5.354 7.854a.5.5 0 1 1-.708-.708l3-3a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1-.708.708L8.5 5.707V11.5z"/></svg>目次に戻る</a></div>
-
-                <h3 id="content-section1-5">謎解き要素②</h3>
-                <div class="back-to-top"><a href="#top"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-up-circle-fill" viewBox="0 0 16 16"><path d="M16 8A8 8 0 1 0 0 8a8 8 0 0 0 16 0zm-7.5 3.5a.5.5 0 0 1-1 0V5.707L5.354 7.854a.5.5 0 1 1-.708-.708l3-3a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1-.708.708L8.5 5.707V11.5z"/></svg>目次に戻る</a></div>
-                <img src="開発資料/企画書の画像/[企画]Mystery Solving Dungeon 修正後_page-0006.jpg">
-                <div class="back-to-top"><a href="#top"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-up-circle-fill" viewBox="0 0 16 16"><path d="M16 8A8 8 0 1 0 0 8a8 8 0 0 0 16 0zm-7.5 3.5a.5.5 0 0 1-1 0V5.707L5.354 7.854a.5.5 0 1 1-.708-.708l3-3a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1-.708.708L8.5 5.707V11.5z"/></svg>目次に戻る</a></div>
-
-                <h3 id="content-section1-6">謎解き要素③</h3>
-                <div class="back-to-top"><a href="#top"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-up-circle-fill" viewBox="0 0 16 16"><path d="M16 8A8 8 0 1 0 0 8a8 8 0 0 0 16 0zm-7.5 3.5a.5.5 0 0 1-1 0V5.707L5.354 7.854a.5.5 0 1 1-.708-.708l3-3a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1-.708.708L8.5 5.707V11.5z"/></svg>目次に戻る</a></div>
-                <img src="開発資料/企画書の画像/[企画]Mystery Solving Dungeon 修正後_page-0007.jpg">
-                <div class="back-to-top"><a href="#top"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-up-circle-fill" viewBox="0 0 16 16"><path d="M16 8A8 8 0 1 0 0 8a8 8 0 0 0 16 0zm-7.5 3.5a.5.5 0 0 1-1 0V5.707L5.354 7.854a.5.5 0 1 1-.708-.708l3-3a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1-.708.708L8.5 5.707V11.5z"/></svg>目次に戻る</a></div>
-                
-                <h3 id="content-section1-7">謎解き要素④</h3>
-                <div class="back-to-top"><a href="#top"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-up-circle-fill" viewBox="0 0 16 16"><path d="M16 8A8 8 0 1 0 0 8a8 8 0 0 0 16 0zm-7.5 3.5a.5.5 0 0 1-1 0V5.707L5.354 7.854a.5.5 0 1 1-.708-.708l3-3a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1-.708.708L8.5 5.707V11.5z"/></svg>目次に戻る</a></div>
-                <img src="開発資料/企画書の画像/[企画]Mystery Solving Dungeon 修正後_page-0008.jpg">
-            </div>
-            <div class="back-to-top"><a href="#top"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-up-circle-fill" viewBox="0 0 16 16"><path d="M16 8A8 8 0 1 0 0 8a8 8 0 0 0 16 0zm-7.5 3.5a.5.5 0 0 1-1 0V5.707L5.354 7.854a.5.5 0 1 1-.708-.708l3-3a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1-.708.708L8.5 5.707V11.5z"/></svg>目次に戻る</a></div>
-        </section>
-
-        <hr class="my-10 border-gray-700">
-
-        <section id="content-section2" class="mb-12">
-
-            <h2>2. タイトル画面のフロー</h2>
-            <div class="back-to-top"><a href="#top"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-up-circle-fill" viewBox="0 0 16 16"><path d="M16 8A8 8 0 1 0 0 8a8 8 0 0 0 16 0zm-7.5 3.5a.5.5 0 0 1-1 0V5.707L5.354 7.854a.5.5 0 1 1-.708-.708l3-3a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1-.708.708L8.5 5.707V11.5z"/></svg>目次に戻る</a></div>
-            <div class="section-content">
-                <img src="開発資料/タイトル画面フロー.jpg">
-            </div>
-            <div class="back-to-top"><a href="#top"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-up-circle-fill" viewBox="0 0 16 16"><path d="M16 8A8 8 0 1 0 0 8a8 8 0 0 0 16 0zm-7.5 3.5a.5.5 0 0 1-1 0V5.707L5.354 7.854a.5.5 0 1 1-.708-.708l3-3a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1-.708.708L8.5 5.707V11.5z"/></svg>目次に戻る</a></div>
-        </section>
-
-        <hr class="my-10 border-gray-700">
-
-        <h2 class="text-3xl font-bold text-gray-200 mb-6">3. ゲーム画面 & クリア条件フロー</h2>
-        <div class="back-to-top"><a href="#top"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-up-circle-fill" viewBox="0 0 16 16"><path d="M16 8A8 8 0 1 0 0 8a8 8 0 0 0 16 0zm-7.5 3.5a.5.5 0 0 1-1 0V5.707L5.354 7.854a.5.5 0 1 1-.708-.708l3-3a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1-.708.708L8.5 5.707V11.5z"/></svg>目次に戻る</a></div>
-        <div class="flex-container mb-12" id="content-section-flow-group">
-            
-            <section id="content-section3" class="flex-item">
-                <h2>3. ゲーム画面の基本進行フロー</h2>
-                <div class="section-content">
-                    <img src="開発資料/ゲーム画面フロー.png">
+                <div id="proposal-carousel" class="carousel-container">
+                    <!-- スライドとボタンはJSで挿入 -->
                 </div>
-                <div class="back-to-top"><a href="#top"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-up-circle-fill" viewBox="0 0 16 16"><path d="M16 8A8 8 0 1 0 0 8a8 8 0 0 0 16 0zm-7.5 3.5a.5.5 0 0 1-1 0V5.707L5.354 7.854a.5.5 0 1 1-.708-.708l3-3a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1-.708.708L8.5 5.707V11.5z"/></svg>目次に戻る</a></div>
-            </section>
-            
-            <section id="content-section5" class="flex-item">
-                <h2>クリア条件のフロー</h2>
-                <div class="section-content">
-                    <img src="開発資料/クリア条件フロー.jpg">
-                </div>
-                <div class="back-to-top"><a href="#top"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-up-circle-fill" viewBox="0 0 16 16"><path d="M16 8A8 8 0 1 0 0 8a8 8 0 0 0 16 0zm-7.5 3.5a.5.5 0 0 1-1 0V5.707L5.354 7.854a.5.5 0 1 1-.708-.708l3-3a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1-.708.708L8.5 5.707V11.5z"/></svg>目次に戻る</a></div>
-            </section>
-
-        </div>
-
-        <hr class="my-10 border-gray-700">
-
-        <section id="content-section4" class="mb-12">
-            <h2>4. 各謎解きの基本フロー</h2>
-            <div class="back-to-top"><a href="#top"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-up-circle-fill" viewBox="0 0 16 16"><path d="M16 8A8 8 0 1 0 0 8a8 8 0 0 0 16 0zm-7.5 3.5a.5.5 0 0 1-1 0V5.707L5.354 7.854a.5.5 0 1 1-.708-.708l3-3a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1-.708.708L8.5 5.707V11.5z"/></svg>目次に戻る</a></div>
-            <div class="section-content">
-                <img src="開発資料/謎解きフロー.jpg">
             </div>
-            <div class="back-to-top"><a href="#top"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-up-circle-fill" viewBox="0 0 16 16"><path d="M16 8A8 8 0 1 0 0 8a8 8 0 0 0 16 0zm-7.5 3.5a.5.5 0 0 1-1 0V5.707L5.354 7.854a.5.5 0 1 1-.708-.708l3-3a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1-.708.708L8.5 5.707V11.5z"/></svg>目次に戻る</a></div>
+            <div id="print-section1" style="display: none; color: black !important; padding: 20px;">
+                <!-- JSでコンテンツを複製します -->
+            </div>
+            <div class="back-to-top"><a href="#top" class="text-yellow-400 hover:text-yellow-300"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" class="bi bi-arrow-up-circle-fill" viewBox="0 0 16 16"><path d="M16 8A8 8 0 1 0 0 8a8 8 0 0 0 16 0zm-7.5 3.5a.5.5 0 0 1-1 0V5.707L5.354 7.854a.5.5 0 1 1-.708-.708l3-3a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1-.708.708L8.5 5.707V11.5z"/></svg>目次に戻る</a></div>
         </section>
 
         <hr class="my-10 border-gray-700">
 
-        <section id="content-section6" class="mb-12">
-            <h2>5. DoorMover.h ドキュメントについて</h2>
-            <div class="back-to-top"><a href="#top"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-up-circle-fill" viewBox="0 0 16 16"><path d="M16 8A8 8 0 1 0 0 8a8 8 0 0 0 16 0zm-7.5 3.5a.5.5 0 0 1-1 0V5.707L5.354 7.854a.5.5 0 1 1-.708-.708l3-3a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1-.708.708L8.5 5.707V11.5z"/></svg>目次に戻る</a></div>
+        <!-- 2. フロー図全体 (カルーセル化) -->
+        <section id="content-section-flow" class="mb-12">
+            <h2>2. フロー図全体 (スライドショー)</h2>
+            <p class="text-sm text-gray-400 mb-4">→ タイトル画面、ゲーム進行、クリア条件、謎解きフローをまとめて確認できます。</p>
             <div class="section-content">
-                <img src="開発資料/3DMysterySolvingDungeonドキュメント(変数).jpg">
-            <div class="back-to-top"><a href="#top"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-up-circle-fill" viewBox="0 0 16 16"><path d="M16 8A8 8 0 1 0 0 8a8 8 0 0 0 16 0zm-7.5 3.5a.5.5 0 0 1-1 0V5.707L5.354 7.854a.5.5 0 1 1-.708-.708l3-3a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1-.708.708L8.5 5.707V11.5z"/></svg>目次に戻る</a></div>
+                <div id="flow-carousel" class="carousel-container">
+                    <!-- スライドとボタンはJSで挿入 -->
+                </div>
+            </div>
+            <div id="print-section-flow" style="display: none; color: black !important; padding: 20px;">
+                <!-- JSでコンテンツを複製します -->
+            </div>
+            <div class="back-to-top"><a href="#top" class="text-yellow-400 hover:text-yellow-300"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" class="bi bi-arrow-up-circle-fill" viewBox="0 0 16 16"><path d="M16 8A8 8 0 1 0 0 8a8 8 0 0 0 16 0zm-7.5 3.5a.5.5 0 0 1-1 0V5.707L5.354 7.854a.5.5 0 1 1-.708-.708l3-3a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1-.708.708L8.5 5.707V11.5z"/></svg>目次に戻る</a></div>
         </section>
 
         <hr class="my-10 border-gray-700">
 
-        <section id="content-section7" class="mb-12">
-            <h2>6. DoorMover.cpp ドキュメントについて</h2>
-            <div class="back-to-top"><a href="#top"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-up-circle-fill" viewBox="0 0 16 16"><path d="M16 8A8 8 0 1 0 0 8a8 8 0 0 0 16 0zm-7.5 3.5a.5.5 0 0 1-1 0V5.707L5.354 7.854a.5.5 0 1 1-.708-.708l3-3a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1-.708.708L8.5 5.707V11.5z"/></svg>目次に戻る</a></div>
+        <!-- ▼▼▼ 3. C++ドキュメント (カルーセル化) ▼▼▼ -->
+        <section id="content-section-cpp-docs" class="mb-12">
+            <h2>3. C++ドキュメント (スライドショー)</h2>
+            <p class="text-sm text-gray-400 mb-4">→ C++の変数定義(.h)と関数・活用例(.cpp)をまとめて確認できます。</p>
             <div class="section-content">
-                <img src="開発資料/3DMysterySolvingDungeonドキュメント(関数や、活用例).jpg">
-            <div class="back-to-top"><a href="#top"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-up-circle-fill" viewBox="0 0 16 16"><path d="M16 8A8 8 0 1 0 0 8a8 8 0 0 0 16 0zm-7.5 3.5a.5.5 0 0 1-1 0V5.707L5.354 7.854a.5.5 0 1 1-.708-.708l3-3a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1-.708.708L8.5 5.707V11.5z"/></svg>目次に戻る</a></div>
+                <div id="cpp-carousel" class="carousel-container">
+                    <!-- スライドとボタンはJSで挿入 -->
+                </div>
+            </div>
+            <!-- 印刷用コンテナ -->
+            <div id="print-section-cpp-docs" style="display: none; color: black !important; padding: 20px;">
+                <!-- JSでコンテンツを複製します -->
+            </div>
+            <div class="back-to-top"><a href="#top" class="text-yellow-400 hover:text-yellow-300"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" class="bi bi-arrow-up-circle-fill" viewBox="0 0 16 16"><path d="M16 8A8 8 0 1 0 0 8a8 8 0 0 0 16 0zm-7.5 3.5a.5.5 0 0 1-1 0V5.707L5.354 7.854a.5.5 0 1 1-.708-.708l3-3a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1-.708.708L8.5 5.707V11.5z"/></svg>目次に戻る</a></div>
         </section>
+        <!-- ▲▲▲ ここまで修正 ▲▲▲ -->
 
         <hr class="my-10 border-gray-700">
 
+        <!-- ▼▼▼ 4. テスト仕様書 (元の5番、IDとH2を修正) ▼▼▼ -->
         <section id="content-section8" class="mb-12">
-            <h2>7. テスト仕様書のご紹介（一部から抜粋）になります。</h2>
-            <div class="back-to-top"><a href="#top"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-up-circle-fill" viewBox="0 0 16 16"><path d="M16 8A8 8 0 1 0 0 8a8 8 0 0 0 16 0zm-7.5 3.5a.5.5 0 0 1-1 0V5.707L5.354 7.854a.5.5 0 1 1-.708-.708l3-3a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1-.708.708L8.5 5.707V11.5z"/></svg>目次に戻る</a></div>
+            <h2>4. テスト仕様書のご紹介（一部から抜粋）になります。</h2>
             <div class="section-content">
-                <img src="開発資料/テスト仕様書一部のスクリーンショット.png">
-            <div class="back-to-top"><a href="#top"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-up-circle-fill" viewBox="0 0 16 16"><path d="M16 8A8 8 0 1 0 0 8a8 8 0 0 0 16 0zm-7.5 3.5a.5.5 0 0 1-1 0V5.707L5.354 7.854a.5.5 0 1 1-.708-.708l3-3a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1-.708.708L8.5 5.707V11.5z"/></svg>目次に戻る</a></div>
+                <!-- クラス指定は max-w-3xl のままでOK -->
+                <img src="開発資料/テスト仕様書一部のスクリーンショット.png" alt="テスト仕様書の一部スクリーンショット" class="rounded-lg shadow-md w-full max-w-3xl h-auto mx-auto">
+            </div>
+            <div class="back-to-top"><a href="#top" class="text-yellow-400 hover:text-yellow-300"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" class="bi bi-arrow-up-circle-fill" viewBox="0 0 16 16"><path d="M16 8A8 8 0 1 0 0 8a8 8 0 0 0 16 0zm-7.5 3.5a.5.5 0 0 1-1 0V5.707L5.354 7.854a.5.5 0 1 1-.708-.708l3-3a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1-.708.708L8.5 5.707V11.5z"/></svg>目次に戻る</a></div>
         </section>
+        <!-- ▲▲▲ ここまで修正 ▲▲▲ -->
     </div>
+
+    <script>
+        // 企画書セクションの全画像データ (セクション1)
+        const proposalSlides = [
+            { id: 'content-section1-1', title: 'タイトル', src: '開発資料/企画書の画像/[企画]Mystery Solving Dungeon 修正後_page-0002.jpg', alt: '企画書 - タイトル' },
+            { id: 'content-section1-2', title: 'ゲーム内容について', src: '開発資料/企画書の画像/[企画]Mystery Solving Dungeon 修正後_page-0003.jpg', alt: '企画書 - ゲーム内容' },
+            { id: 'content-section1-3', title: '画面操作方法', src: '開発資料/企画書の画像/[企画]Mystery Solving Dungeon 修正後_page-0004.jpg', alt: '企画書 - 画面操作方法' },
+            { id: 'content-section1-4', title: '謎解き要素①', src: '開発資料/企画書の画像/[企画]Mystery Solving Dungeon 修正後_page-0005.jpg', alt: '企画書 - 謎解き要素1' },
+            { id: 'content-section1-5', title: '謎解き要素②', src: '開発資料/企画書の画像/[企画]Mystery Solving Dungeon 修正後_page-0006.jpg', alt: '企画書 - 謎解き要素2' },
+            { id: 'content-section1-6', title: '謎解き要素③', src: '開発資料/企画書の画像/[企画]Mystery Solving Dungeon 修正後_page-0007.jpg', alt: '企画書 - 謎解き要素3' },
+            { id: 'content-section1-7', title: '謎解き要素④', src: '開発資料/企画書の画像/[企画]Mystery Solving Dungeon 修正後_page-0008.jpg', alt: '企画書 - 謎解き要素4' }
+        ];
+
+        // フロー図の画像データ (セクション2)
+        const flowSlides = [
+            { id: 'flow-slide-1', title: 'タイトル画面の基本フロー', src: '開発資料/タイトル画面フロー.jpg', alt: 'タイトル画面フロー図' },
+            { id: 'flow-slide-2', title: 'ゲーム画面の基本進行フロー', src: '開発資料/ゲーム画面フロー.png', alt: 'ゲーム画面フロー図' },
+            { id: 'flow-slide-3', title: 'クリア条件のフロー', src: '開発資料/クリア条件フロー.jpg', alt: 'クリア条件フロー図' },
+            { id: 'flow-slide-4', title: '各謎解きの基本フロー', src: '開発資料/謎解きフロー.jpg', alt: '謎解き基本フロー図' }
+        ];
+
+        // ▼▼▼ C++ドキュメントの画像データ (セクション3) を追加 ▼▼▼
+        const cppDocSlides = [
+            { id: 'cpp-doc-1', title: 'DoorMover.h ドキュメント (C++変数)', src: '開発資料/3DMysterySolvingDungeonドキュメント(変数).jpg', alt: 'DoorMover.h 変数ドキュメント' },
+            { id: 'cpp-doc-2', title: 'DoorMover.cpp ドキュメント (C++関数・活用例)', src: '開発資料/3DMysterySolvingDungeonドキュメント(関数や、活用例).jpg', alt: 'DoorMover.cpp 関数と活用例ドキュメント' }
+        ];
+        // ▲▲▲ ここまで追加 ▲▲▲
+
+        /**
+         * カルーセルを初期化し、DOMに要素を追加します。
+         * @param {string} carouselContainerId - カルーセルコンテナのID
+         * @param {string} printContainerId - 印刷用コンテナのID
+         * @param {Array<Object>} slidesData - スライドのデータ配列
+         */
+        function setupCarousel(carouselContainerId, printContainerId, slidesData) {
+            let currentSlideIndex = 0;
+            const carouselContainer = document.getElementById(carouselContainerId);
+            const printContainer = document.getElementById(printContainerId);
+
+            if (!carouselContainer || slidesData.length === 0) return;
+
+            // スライドコンテナ
+            const slidesWrapper = document.createElement('div');
+            slidesWrapper.className = 'carousel-slides';
+
+            // ナビゲーションボタン（Prev/Next）
+            const prevButton = createNavButton(-1, 'carousel-prev');
+            const nextButton = createNavButton(1, 'carousel-next');
+
+            // インジケーターコンテナ
+            const indicatorsContainer = document.createElement('div');
+            indicatorsContainer.className = 'carousel-indicators';
+
+            // --- 内部関数定義 ---
+
+            /**
+             * 指定されたインデックスのスライドを表示します。
+             */
+            function showSlide(index) {
+                currentSlideIndex = index;
+                const indicators = carouselContainer.querySelectorAll('.carousel-indicator');
+
+                // スライドの移動
+                const offset = -currentSlideIndex * 100;
+                slidesWrapper.style.transform = `translateX(${offset}%)`;
+
+                // インジケーターの更新
+                indicators.forEach((indicator, i) => {
+                    indicator.classList.toggle('active', i === currentSlideIndex);
+                });
+            }
+
+            /**
+             * スライドのDOM要素を作成します。
+             */
+            function createSlideElement(slide, index) {
+                const slideDiv = document.createElement('div');
+                slideDiv.className = 'carousel-slide';
+                slideDiv.dataset.index = index;
+                slideDiv.innerHTML = `
+                    <h3 class="mb-4">${slide.title} (Page ${index + 1}/${slidesData.length})</h3>
+                    <img src="${slide.src}" alt="${slide.alt}" class="cursor-pointer" onclick="window.open('${slide.src}', '_blank')">
+                `;
+                return slideDiv;
+            }
+
+            /**
+             * ナビゲーションボタンを作成します。
+             */
+            function createNavButton(direction, className) {
+                const button = document.createElement('button');
+                button.className = 'carousel-nav-btn ' + className;
+                button.innerHTML = className.includes('prev') ? '&#10094;' : '&#10095;'; // 矢印記号
+                button.title = direction === -1 ? 'Previous' : 'Next';
+                button.addEventListener('click', () => {
+                    let newIndex = currentSlideIndex + direction;
+                    if (newIndex < 0) newIndex = slidesData.length - 1;
+                    if (newIndex >= slidesData.length) newIndex = 0;
+                    showSlide(newIndex);
+                });
+                return button;
+            }
+
+            /**
+             * 印刷用コンテンツのDOM要素を作成します。
+             */
+            function createPrintElement(slide) {
+                if (!printContainer) return;
+                const printDiv = document.createElement('div');
+                printDiv.className = 'print-slide';
+                printDiv.innerHTML = `
+                    <h3 id="${slide.id}" class="text-xl font-semibold mb-2">${slide.title}</h3>
+                    <img src="${slide.src}" alt="${slide.alt}" style="max-width: 80%; margin-left: auto; margin-right: auto; display: block;">
+                `;
+                printContainer.appendChild(printDiv);
+            }
+
+            // --- カルーセル全体の構築 ---
+            slidesData.forEach((slide, index) => {
+                // 画面表示用スライド
+                const slideDiv = createSlideElement(slide, index);
+                slidesWrapper.appendChild(slideDiv);
+
+                // インジケーター
+                const indicator = document.createElement('span');
+                indicator.className = 'carousel-indicator';
+                indicator.addEventListener('click', () => showSlide(index));
+                indicatorsContainer.appendChild(indicator);
+
+                // 印刷用コンテンツの複製
+                createPrintElement(slide);
+            });
+
+            carouselContainer.appendChild(slidesWrapper);
+            carouselContainer.appendChild(prevButton);
+            carouselContainer.appendChild(nextButton);
+            carouselContainer.appendChild(indicatorsContainer);
+
+            // 最初のスライドを表示
+            showSlide(currentSlideIndex);
+        }
+
+        // ページロード完了後に両方のカルーセルを初期化
+        window.onload = function() {
+            // 1. 企画書カルーセル
+            setupCarousel('proposal-carousel', 'print-section1', proposalSlides);
+            
+            // 2. フロー図カルーセル
+            setupCarousel('flow-carousel', 'print-section-flow', flowSlides);
+            
+            // ▼▼▼ 3. C++ドキュメントカルーセル を追加 ▼▼▼
+            setupCarousel('cpp-carousel', 'print-section-cpp-docs', cppDocSlides);
+            // ▲▲▲ ここまで追加 ▲▲▲
+        };
+    </script>
 </body>
 </html>
